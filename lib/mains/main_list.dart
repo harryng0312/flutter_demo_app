@@ -1,0 +1,232 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Product layout demo home page'),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  MyHomePage({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget content = Scaffold(
+      appBar: AppBar(title: Text("Product Listing")),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
+        children: <Widget>[
+          ProductBox(
+              name: "iPhone",
+              description: "iPhone is the stylist phone ever",
+              price: 1000,
+              image: "iphone.jpg"),
+          ProductBox(
+              name: "Pixel",
+              description: "Pixel is the most featureful phone ever",
+              price: 800,
+              image: "pixel.jpg"),
+          ProductBox(
+              name: "Laptop",
+              description: "Laptop is most productive development tool",
+              price: 2000,
+              image: "laptop.jpg"),
+          ProductBox(
+              name: "Tablet",
+              description: "Tablet is the most useful device ever for meeting",
+              price: 1500,
+              image: "tablet.jpg"),
+          ProductBox(
+              name: "Pendrive",
+              description: "Pendrive is useful storage medium",
+              price: 100,
+              image: "pendrive.jpg"),
+          ProductBox(
+              name: "Floppy Drive",
+              description: "Floppy drive is useful rescue storage medium",
+              price: 20,
+              image: "floppydisk.jpg"),
+          ProductBox(
+              name: "iPhone",
+              description: "iPhone is the stylist phone ever",
+              price: 1000,
+              image: "iphone.jpg"),
+          ProductBox(
+              name: "Pixel",
+              description: "Pixel is the most featureful phone ever",
+              price: 800,
+              image: "pixel.jpg"),
+          ProductBox(
+              name: "Laptop",
+              description: "Laptop is most productive development tool",
+              price: 2000,
+              image: "laptop.jpg"),
+          ProductBox(
+              name: "Tablet",
+              description: "Tablet is the most useful device ever for meeting",
+              price: 1500,
+              image: "tablet.jpg"),
+          ProductBox(
+              name: "Pendrive",
+              description: "Pendrive is useful storage medium",
+              price: 100,
+              image: "pendrive.jpg"),
+          ProductBox(
+              name: "Floppy Drive",
+              description: "Floppy drive is useful rescue storage medium",
+              price: 20,
+              image: "floppydisk.jpg"),
+        ],
+      ),
+      drawer: Drawer(
+        elevation: 20.0,
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("Cafedev"),
+              accountEmail: Text("Cafedev@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.yellow,
+                child: Text("abc"),
+              ),
+            ),
+            ListTile(
+              title: new Text("Inbox"),
+              leading: new Icon(Icons.mail),
+            ),
+            Divider(
+              height: 0.1,
+            ),
+            ListTile(
+              title: new Text("Primary"),
+              leading: new Icon(Icons.inbox),
+            ),
+            ListTile(
+              title: new Text("Social"),
+              leading: new Icon(Icons.people),
+            ),
+            ListTile(
+              title: new Text("Promotions"),
+              leading: new Icon(Icons.local_offer),
+            )
+          ],
+        ),
+      ),
+      persistentFooterButtons: [
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.blue)),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green)),
+          child: Icon(
+            Icons.clear,
+            color: Colors.white,
+          ),
+        )
+      ],
+      bottomNavigationBar: BottomAppBar(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.home),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.show_chart),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: new Text(''),
+            ),
+            // Expanded(child: ExpansionPanel( ),),
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.tab),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+    );
+    return content;
+  }
+}
+
+class ProductBox extends StatelessWidget {
+  ProductBox(
+      {required this.name,
+      required this.description,
+      required this.price,
+      required this.image});
+
+  final String name;
+  final String description;
+  final int price;
+  final String image;
+
+  Widget build(BuildContext context) {
+    return (Container(
+        padding: EdgeInsets.all(2),
+        height: 120,
+        child: Card(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+              Image.asset("assets/images/" + image),
+              Expanded(
+                  child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(this.name,
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(this.description),
+                          Text("Price: " + this.price.toString()),
+                        ],
+                      )))
+            ]))));
+  }
+}
