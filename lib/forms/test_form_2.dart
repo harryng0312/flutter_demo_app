@@ -50,7 +50,10 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    this.setState(() {
+
+    });
+    Widget form = Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,13 +96,13 @@ class MyCustomFormState extends State<MyCustomForm> {
               if (dt != null) {
                 // FocusScope.of(context).requestFocus(fNodeTxtDob);
                 String value = DateFormat('yyyy/MM/dd').format(dt);
-                // txtDobCtr.text = DateFormat('yyyy/MM/dd').format(dt);
-                txtDobCtr.value = TextEditingValue(
-                  text: value,
-                  selection: TextSelection.fromPosition(
-                    TextPosition(offset: value.length),
-                  ),
-                );
+                txtDobCtr.text = value;
+                // txtDobCtr.value = TextEditingValue(
+                //   text: value,
+                //   selection: TextSelection.fromPosition(
+                //     TextPosition(offset: value.length),
+                //   ),
+                // );
                 print("Dob: ${txtDobCtr.text}");
               }
             },
@@ -115,5 +118,6 @@ class MyCustomFormState extends State<MyCustomForm> {
         ],
       ),
     );
+    return form;
   }
 }
