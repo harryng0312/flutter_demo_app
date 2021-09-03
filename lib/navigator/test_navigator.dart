@@ -11,7 +11,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Product Navigation demo home page'),
+      // home: MyHomePage(title: 'Product Navigation demo home page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: 'Product Navigation demo home page')
+      },
     );
   }
 }

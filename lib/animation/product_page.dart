@@ -25,10 +25,10 @@ class _ProductPageState extends State<ProductPage>
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     slideTransitionAnimation = Tween(begin: Offset(1.1, 0.0), end: Offset.zero)
         .animate(CurvedAnimation(
-            parent: animationController, curve: Curves.elasticIn));
+            parent: animationController, curve: Curves.easeInBack));
     sizeTransitionAnimation =
         Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
     // sizeTransitionAnimation = CurvedAnimation(
