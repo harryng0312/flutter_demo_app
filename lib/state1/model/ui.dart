@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UI with ChangeNotifier {
+// class UI {
   double _fontSize = 0.5;
 
   set fontSize(newValue) {

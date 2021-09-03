@@ -12,7 +12,30 @@ class Settings extends StatelessWidget {
         title: Text('Settings'),
       ),
       drawer: DrawerMenu(),
-      body: Consumer<UI>(builder: (context, ui, child) {
+      // body: Consumer<UI>(builder: (context, ui, child) {
+      //   return Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: <Widget>[
+      //       Padding(
+      //         padding: EdgeInsets.only(left: 20, top: 20),
+      //         child: Text(
+      //           'Font Size: ${ui.fontSize.toInt()}',
+      //           style: TextStyle(
+      //               fontSize: Theme.of(context).textTheme.headline5!.fontSize),
+      //         ),
+      //       ),
+      //       Slider(
+      //           min: 0.5,
+      //           value: ui.sliderFontSize,
+      //           onChanged: (newValue) {
+      //             ui.fontSize = newValue;
+      //           }),
+      //     ],
+      //   );
+      // }),
+
+      body: Builder(builder: (context) {
+        UI ui = Provider.of<UI>(context);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -24,15 +47,45 @@ class Settings extends StatelessWidget {
                     fontSize: Theme.of(context).textTheme.headline5!.fontSize),
               ),
             ),
-            Slider(
-                min: 0.5,
-                value: ui.sliderFontSize,
-                onChanged: (newValue) {
-                  ui.fontSize = newValue;
-                }),
+            // Consumer<UI>(
+              // builder: (context, ui, child) {
+                Slider(
+                    min: 0.5,
+                    value: ui.sliderFontSize,
+                    onChanged: (newValue) {
+                      ui.fontSize = newValue;
+                    })
+              // },
+            // )
           ],
         );
       }),
+      // worked but not update the slider
+      // body: Builder(builder: (context) {
+      //   UI ui = Provider.of<UI>(context);
+      //   GlobalKey sliderKey = GlobalKey();
+      //   return Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: <Widget>[
+      //       Padding(
+      //         padding: EdgeInsets.only(left: 20, top: 20),
+      //         child: Text(
+      //           'Font Size: ${ui.fontSize.toInt()}',
+      //           style: TextStyle(
+      //               fontSize:
+      //                   Theme.of(context).textTheme.headline5!.fontSize),
+      //         ),
+      //       ),
+      //       Slider(
+      //           key: sliderKey,
+      //           min: 0.5,
+      //           value: ui.sliderFontSize,
+      //           onChanged: (newValue) {
+      //             ui.fontSize = newValue;
+      //           }),
+      //     ],
+      //   );
+      // })
     );
   }
 }
