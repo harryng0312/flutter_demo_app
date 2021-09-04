@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'model/user.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -35,7 +37,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
 // Build a Form widget using the _formKey created above.
   FocusNode fNodeTxtUsername = new FocusNode();
-  FocusNode fNodeTxtPasswd = new FocusNode();
+  FocusNode fNodeTxtPhoneNumber = new FocusNode();
   FocusNode fNodeTxtDob = new FocusNode();
 
   // FocusScope.of(context).requestFocus(fNodeTxtUsername);
@@ -43,16 +45,17 @@ class MyCustomFormState extends State<MyCustomForm> {
   TextEditingController txtPhoneCtrl = new TextEditingController();
   TextEditingController txtDobCtr = new TextEditingController();
 
+  User? user = null;
+
   @override
   void initState() {
     super.initState();
+    user = User(name: "", phoneNumber: "", dob: DateTime.now());
   }
 
   @override
   Widget build(BuildContext context) {
-    this.setState(() {
-
-    });
+    this.setState(() {});
     Widget form = Form(
       key: _formKey,
       child: Column(
@@ -61,6 +64,16 @@ class MyCustomFormState extends State<MyCustomForm> {
           TextFormField(
             controller: txtNameCtrl,
             focusNode: fNodeTxtUsername,
+            validator: (value) {
+              String? rs;
+              if (value == null || value.isEmpty) {
+                rs = 'Name is required';
+              }
+              return rs;
+            },
+            onSaved: (value) {
+              this.user!.name = value!;
+            },
             decoration: const InputDecoration(
               icon: const Icon(Icons.person),
               hintText: 'Enter your name',
@@ -69,7 +82,19 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           TextFormField(
             controller: txtPhoneCtrl,
-            focusNode: fNodeTxtPasswd,
+            focusNode: fNodeTxtPhoneNumber,
+            validator: (value) {
+              String? rs;
+              String phoneNoPattern = r"^[0-9]{9,12}$";
+              RegExp regex = RegExp(phoneNoPattern);
+              if (value == null || value.trim().isEmpty) {
+                rs = "Phone number is required";
+              } else if (!regex.hasMatch(value)) {
+                rs = "Phone number is not correct";
+              }
+              return rs;
+            },
+            onSaved: (value) => user!.phoneNumber = value!,
             decoration: const InputDecoration(
               icon: const Icon(Icons.phone),
               hintText: 'Enter a phone number',
@@ -80,9 +105,31 @@ class MyCustomFormState extends State<MyCustomForm> {
           TextFormField(
             controller: txtDobCtr,
             focusNode: fNodeTxtDob,
+            validator: (value) {
+              String? rs;
+              if (value == null || value.trim().isEmpty) {
+                rs = "Dob is required";
+              }else {
+                DateTime? dob;
+                try {
+                  String tmp = DateFormat('yyyy/MM/dd').format(
+                      DateFormat("yyyy/MM/dd").parse(value));
+                  if (tmp == value) {
+                    dob = DateFormat("y/M/d").parse(value);
+                  } else {
+                    rs = "Dob is invalid";
+                  }
+                } on FormatException {
+                  rs = "Dob is not correct";
+                }
+              }
+              return rs;
+            },
+            onSaved: (value) =>
+                user!.dob = DateFormat("yyyy/MM/dd").parse(value!),
             decoration: const InputDecoration(
               icon: const Icon(Icons.calendar_today),
-              hintText: 'Enter your date of birth, format: dd/MM/yyyy',
+              hintText: 'Enter your date of birth, format: yyyy/MM/dd',
               labelText: 'Dob',
             ),
             keyboardType: TextInputType.datetime,
@@ -103,7 +150,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 //     TextPosition(offset: value.length),
                 //   ),
                 // );
-                print("Dob: ${txtDobCtr.text}");
+                // print("Dob: ${txtDobCtr.text}");
               }
             },
           ),
@@ -112,7 +159,11 @@ class MyCustomFormState extends State<MyCustomForm> {
               child: new ElevatedButton(
                 child: const Text('Submit'),
                 onPressed: () {
-                  _formKey.currentState!.save();
+                  if(_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    print("Username: ${user!.name}\nPhone No: ${user!.phoneNumber}"
+                        "\nDob: ${DateFormat("yyyy/MM/dd").format(user!.dob)}");
+                  }
                 },
               )),
         ],
