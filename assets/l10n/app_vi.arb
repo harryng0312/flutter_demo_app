@@ -1,0 +1,8 @@
+{
+  "@@locale": "vi",
+  "title": "Phờ lút tơ đề mô",
+  "helloWorld": "Xin chào Thế giới!",
+  "@helloWorld": {
+    "description": "Lời chào của lập trình viên mới vào nghề thông thường"
+  }
+}

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class ThemeUtil {
   static ThemeData defaultThemeData = ThemeData(
-    accentColor: Colors.blue,
+    primarySwatch: Colors.yellow,
+    accentColor: Colors.green,
     // Define the default brightness and colors.
-    brightness: Brightness.dark,
-    primaryColor: Colors.red,
-    secondaryHeaderColor: Colors.green,
+    brightness: Brightness.light,
+    primaryColor: Colors.blue,
+    secondaryHeaderColor: Colors.cyan,
     // accentColor: Colors.green,
     // Define the default font family.
     fontFamily: 'Monotype Coursiva',
@@ -15,7 +16,7 @@ class ThemeUtil {
     textTheme: TextTheme(
         headline5: TextStyle(
             fontSize: 32.0, fontStyle: FontStyle.italic, fontFamily: 'Hind')),
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.orange,
   );
   static _ExendedStyles extStyle = _ExendedStyles();
 }

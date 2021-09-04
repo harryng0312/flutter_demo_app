@@ -1,0 +1,10 @@
+{
+  "@@locale": "vi",
+  "title": "Phờ lút tơ đề mô",
+  "countMsg": "Số lần bạn đã ấn cái nút này:",
+  "helloWorld": "Xin chào Thế giới!",
+
+  "@helloWorld": {
+    "description": "Lời chào của lập trình viên mới vào nghề thông thường"
+  }
+}
