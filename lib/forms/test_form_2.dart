@@ -115,7 +115,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   String tmp = DateFormat('yyyy/MM/dd').format(
                       DateFormat("yyyy/MM/dd").parse(value));
                   if (tmp == value) {
-                    dob = DateFormat("y/M/d").parse(value);
+                    dob = DateFormat("yyyy/MM/dd").parse(value);
                   } else {
                     rs = "Dob is invalid";
                   }
