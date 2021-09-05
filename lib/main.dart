@@ -5,5 +5,7 @@ import 'package:flutter/material.dart';
 // import 'state1/test_state.dart';
 // import 'localization/test_localization_2.dart';
 // import 'state/test_state.dart';
-import 'forms/test_form_2.dart';
+// import 'forms/test_form_2.dart';
+import 'sqlite/test_sqlite.dart';
+
 void main() => runApp(MyApp());
