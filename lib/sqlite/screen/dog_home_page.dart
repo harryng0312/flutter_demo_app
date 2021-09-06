@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/sqlite/controller/dog_controller.dart';
@@ -23,37 +24,8 @@ class _DogHomePageState extends State<DogHomePage> {
           pinned: true,
           expandedHeight: 90,
           elevation: 20,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Column(children: [
-              SizedBox(height: 100.0),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                child: Container(
-                  height: 30.0,
-                  child: TextSelectionGestureDetector(
-                    child: TextField(
-                      controller: dogController.txtSearchCtr,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          suffixIcon: IconButton(
-                            iconSize: 20,
-                            icon: Icon(Icons.clear),
-                            onPressed: dogController.refreshDataHandler,
-                          ),
-                          // border: InputBorder.none,
-                          // focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 13),
-                          hintText: "Search"),
-                      onChanged: dogController.searchDogHandler,
-                      onSubmitted: dogController.searchDogHandler,
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-          ),
+          // flexibleSpace: buildFlexibleSpace(),
+          flexibleSpace: buildFlexibleSpaceTransform(),
           leading: IconButton(
             icon: Icon(Icons.refresh),
             onPressed: dogController.refreshDataHandler,
@@ -135,5 +107,81 @@ class _DogHomePageState extends State<DogHomePage> {
             return widget;
           }),
     ]));
+  }
+
+  Widget buildFlexibleSpace() {
+    return FlexibleSpaceBar(
+      background: Column(children: [
+        SizedBox(height: 100.0),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          child: Container(
+            height: 30.0,
+            child: TextSelectionGestureDetector(
+              child: TextField(
+                controller: dogController.txtSearchCtr,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      iconSize: 20,
+                      icon: Icon(Icons.clear),
+                      onPressed: dogController.refreshDataHandler,
+                    ),
+                    // border: InputBorder.none,
+                    // focusedBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 13),
+                    hintText: "Search"),
+                onChanged: dogController.searchDogHandler,
+                onSubmitted: dogController.searchDogHandler,
+              ),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget buildFlexibleSpaceTransform() {
+    return LayoutBuilder(
+      builder: (context, c) {
+        final settings = context
+            .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+        final deltaExtent = settings!.maxExtent - settings.minExtent;
+        final t =
+            (1.0 - (settings.currentExtent - settings.minExtent) / deltaExtent)
+                .clamp(0.0, 1.0);
+        final fadeStart = max(0.0, 1.0 - kToolbarHeight / deltaExtent);
+        const fadeEnd = 1.0;
+        final opacity = 1.0 - Interval(fadeStart, fadeEnd).transform(t);
+
+        return Stack(
+          children: [
+            Center(
+              child: Opacity(
+                  opacity: 1 - opacity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      dogController.txtSearchCtr.text.isNotEmpty?
+                          dogController.txtSearchCtr.text:"Dog list",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )),
+            ),
+            Opacity(
+              opacity: opacity,
+              child: buildFlexibleSpace(),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
