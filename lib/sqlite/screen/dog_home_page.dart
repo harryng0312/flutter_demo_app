@@ -42,14 +42,14 @@ class _DogHomePageState extends State<DogHomePage> {
                           suffixIcon: IconButton(
                             iconSize: 20,
                             icon: Icon(Icons.clear),
-                            onPressed: dogController.refreshData,
+                            onPressed: dogController.refreshDataHandler,
                           ),
                           // border: InputBorder.none,
                           // focusedBorder: InputBorder.none,
                           contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 13),
                           hintText: "Search"),
-                      onChanged: dogController.searchDog,
-                      onSubmitted: dogController.searchDog,
+                      onChanged: dogController.searchDogHandler,
+                      onSubmitted: dogController.searchDogHandler,
                     ),
                   ),
                 ),
@@ -58,22 +58,14 @@ class _DogHomePageState extends State<DogHomePage> {
           ),
           leading: IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: dogController.refreshData,
+            onPressed: dogController.refreshDataHandler,
           ),
           actions: [
             IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
                   setState(() {
-                    // dogController.addDogHandler();
-                    // add a new Dog
-                    int id = DateTime.now().millisecondsSinceEpoch;
-                    String name = lorem(paragraphs: 1, words: 1);
-                    Random rand = Random();
-                    int age = rand.nextInt(100);
-                    Dog dog = Dog(id: id, name: name, age: age);
-                    dogController.lsDataDog.add(dog);
-                    dogController.refreshData();
+                    dogController.addDogHandler();
                   });
                 }),
             IconButton(

@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Provider(create: (context) => UI()),
-        ChangeNotifierProvider(create: (context) => UI()),
+        Provider(create: (context) => UI()),
+        // ChangeNotifierProvider(create: (context) => UI()),
       ],
       child: MaterialApp(
         initialRoute: '/',
