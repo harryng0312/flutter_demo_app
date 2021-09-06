@@ -1,9 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:learning_flutter/sqlite/controller/dog_controller.dart';
-import 'package:learning_flutter/sqlite/model/dog.dart';
 
 class DogHomePage extends StatefulWidget {
   @override
@@ -21,10 +18,11 @@ class _DogHomePageState extends State<DogHomePage> {
       PreferredSize(
         preferredSize: Size.fromHeight(140.0), // not affected
         child: SliverAppBar(
-          title: Text('Dog list'),
+          // title: Text('Dog Home page'),
           floating: true,
           pinned: true,
           expandedHeight: 90,
+          elevation: 20,
           flexibleSpace: FlexibleSpaceBar(
             background: Column(children: [
               SizedBox(height: 100.0),

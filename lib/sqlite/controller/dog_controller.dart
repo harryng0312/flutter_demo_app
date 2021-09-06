@@ -6,7 +6,6 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:learning_flutter/sqlite/model/dog.dart';
 import 'package:learning_flutter/sqlite/util/sqlite_util.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
 
 class DogController {
   // fields
@@ -38,15 +37,15 @@ class DogController {
     SqliteUtil sqliteUtil = Provider.of<SqliteUtil>(context, listen: false);
     sqliteUtil
         .openDb()
-        .then((db) => sqliteUtil.selectDog(db, true, "", true))
-        .then((value) => rs = value[1] as List<Dog>)
+        .then((db) => sqliteUtil.selectDog(true, "", true))
+        .then((value) => rs = value)
         .whenComplete(() {
       sqliteUtil.closeDb();
       pnlResultKey.currentState!.setState(() {
         txtSearchCtr.clear();
         lsSearchDog.clear();
         lsSearchDog.addAll(rs);
-        print("List of dog size:${lsSearchDog.length}");
+        // print("List of dog size:${lsSearchDog.length}");
       });
     });
   }
@@ -55,15 +54,11 @@ class DogController {
     // List<Dog> result = [];
     List<Dog> rs = List.empty(growable: false);
     if (keyWord.isNotEmpty) {
-      // rs = lsDataDog
-      //     .where((element) =>
-      //         element.name.toLowerCase().contains(keyWord.toLowerCase()))
-      //     .toList();
       SqliteUtil sqliteUtil = Provider.of<SqliteUtil>(context, listen: false);
       sqliteUtil
           .openDb()
-          .then((db) => sqliteUtil.selectDog(db, false, keyWord, true))
-          .then((value) => rs = value[1] as List<Dog>)
+          .then((db) => sqliteUtil.selectDog(false, keyWord, true))
+          .then((value) => rs = value)
           .whenComplete(() {
         sqliteUtil.closeDb();
         pnlResultKey.currentState!.setState(() {
@@ -85,7 +80,7 @@ class DogController {
     SqliteUtil sqliteUtil = Provider.of<SqliteUtil>(context, listen: false);
     sqliteUtil
         .openDb()
-        .then((db) => sqliteUtil.insertDog(db, dog))
+        .then((db) => sqliteUtil.insertDog(dog))
         .whenComplete(() {
       sqliteUtil.closeDb();
       // remove search value
@@ -102,15 +97,11 @@ class DogController {
     txtSearchCtr.clear();
     // lsDataDog.removeLast();
     SqliteUtil sqliteUtil = Provider.of<SqliteUtil>(context, listen: false);
-    sqliteUtil
-        .openDb()
-        .then((db) => sqliteUtil.selectDogMinId(db))
-        .then((value) {
-      Database db = value[0] as Database;
-      Future<List<dynamic>> rs = Future.value([db, 0]);
-      Dog? dog = value[1] as Dog?;
+    sqliteUtil.openDb().then((db) => sqliteUtil.selectDogMinId()).then((value) {
+      Future<int> rs = Future.value(0);
+      Dog? dog = value;
       if (dog != null) {
-        rs = sqliteUtil.deleteDog(db, dog.id);
+        rs = sqliteUtil.deleteDog(dog.id);
       }
       return rs;
     }).whenComplete(() {
