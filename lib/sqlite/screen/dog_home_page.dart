@@ -11,7 +11,7 @@ class DogHomePage extends StatefulWidget {
 }
 
 class _DogHomePageState extends State<DogHomePage> {
-  late DogController dogController = DogController();
+  late DogController dogController = DogController(state: this);
 
   @override
   Widget build(BuildContext context) {
@@ -62,19 +62,10 @@ class _DogHomePageState extends State<DogHomePage> {
           ),
           actions: [
             IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  setState(() {
-                    dogController.addDogHandler();
-                  });
-                }),
+                icon: Icon(Icons.add), onPressed: dogController.addDogHandler),
             IconButton(
                 icon: Icon(Icons.remove),
-                onPressed: () {
-                  setState(() {
-                    dogController.removeDogHandler();
-                  });
-                }),
+                onPressed: dogController.removeDogHandler),
           ],
         ),
       ),
