@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                   child: Container(
                     height: 30.0,
-                    child: GestureDetector(
+                    child: TextSelectionGestureDetector(
                       child: TextField(
                         controller: txtSearchCtr,
                         keyboardType: TextInputType.text,
