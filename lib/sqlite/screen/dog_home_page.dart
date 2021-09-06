@@ -165,7 +165,8 @@ class _DogHomePageState extends State<DogHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       dogController.txtSearchCtr.text.isNotEmpty?
-                          dogController.txtSearchCtr.text:"Dog list",
+                          dogController.txtSearchCtr.text:
+                        "count of dog: ${dogController.lsSearchDog.length}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
