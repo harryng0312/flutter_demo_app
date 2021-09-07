@@ -2,7 +2,8 @@
     package="org.harryng.demo.demo_app">
    <application
         android:label="demo_app"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

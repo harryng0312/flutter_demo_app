@@ -47,5 +47,15 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <!-- for camera -->
+    <key>NSCameraUsageDescription</key>
+    <string>Explanation on why the camera access is needed.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Explanation on why the camera access is needed.</string>
+    <!-- for file -->
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
 </dict>
 </plist>

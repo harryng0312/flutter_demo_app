@@ -39,6 +39,8 @@ dependencies:
   json_annotation:
   shared_preferences:
   video_player:
+  camera:
+  image_gallery_saver: '^1.6.9'
 
 dev_dependencies:
   flutter_test:
