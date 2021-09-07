@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learning_flutter/sqlite/model/dog.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqliteUtil {
-  late Future<Database> database;
+  late Future<Database> _database;
 
   SqliteUtil();
 
@@ -26,7 +25,7 @@ class SqliteUtil {
     // Avoid errors caused by flutter upgrade.
     // Importing 'package:flutter/widgets.dart' is required.
     WidgetsFlutterBinding.ensureInitialized();
-    this.database = openDatabase(
+    this._database = openDatabase(
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
@@ -37,7 +36,7 @@ class SqliteUtil {
       // path to perform database upgrades and downgrades.
       version: 1,
     );
-    return database;
+    return _database;
   }
 
   Future<Database> openDb() {
@@ -45,19 +44,19 @@ class SqliteUtil {
     return _initDbAsync();
   }
 
-  Future<Database> closeDb() {
-    return database.then((value) {
+  Future<void> closeDb() {
+    return _database.then((value) {
       if (value.isOpen) {
         value.close();
       }
-      return database;
+      return value;
     });
   }
 
   Future<List<Dog>> selectDog(
       bool isLoad, String nameKeyWord, bool sortByIdAsc) async {
     Future<List<Dog>> rs;
-    Database db = await database;
+    Database db = await _database;
     // Future<List<dynamic>> rs;
     if (isLoad) {
       rs = db
@@ -95,7 +94,7 @@ class SqliteUtil {
 
   Future<Dog?> selectDogMinId() async {
     Future<Dog?> rs;
-    Database db = await database;
+    Database db = await _database;
     rs = db.query("dogs", orderBy: "id ASC", limit: 1).then((resultSet) {
       Dog? d;
       resultSet.forEach((element) {
@@ -110,7 +109,7 @@ class SqliteUtil {
   }
 
   Future<int> insertDog(Dog dog) async {
-    Database db = await database;
+    Database db = await _database;
     Future<int> rs = db.insert(
       'dogs',
       dog.toMap(),
@@ -120,14 +119,14 @@ class SqliteUtil {
   }
 
   Future<int> updateDog(Dog dog) async {
-    Database db = await database;
+    Database db = await _database;
     Future<int> rs =
         db.update("dogs", dog.toMap(), where: "id = ?", whereArgs: [dog.id]);
     return rs;
   }
 
   Future<int> deleteDog(int id) async {
-    Database db = await database;
+    Database db = await _database;
     Future<int> rs = db.delete("dogs", where: "id=?", whereArgs: [id]);
     return rs;
   }
