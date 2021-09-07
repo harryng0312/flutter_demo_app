@@ -37,6 +37,7 @@ dependencies:
   path:
   path_provider:
   json_annotation:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:learning_flutter/write_file/model/dog.dart';
 import 'package:path_provider/path_provider.dart' as Path;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FileStorageUtil {
   // late Future<RandomAccessFile> _futureRaf;
@@ -29,6 +30,7 @@ class FileStorageUtil {
   }
 
   Future<int> closeFile() {
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return Future.value(0);
   }
 
