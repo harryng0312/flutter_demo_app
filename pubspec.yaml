@@ -38,6 +38,7 @@ dependencies:
   path_provider:
   json_annotation:
   shared_preferences:
+  video_player:
 
 dev_dependencies:
   flutter_test:

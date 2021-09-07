@@ -9,7 +9,18 @@ class DogHomePage extends StatefulWidget {
 }
 
 class _DogHomePageState extends State<DogHomePage> {
-  late DogController dogController = DogController(state: this);
+  late DogController dogController;
+
+  @override
+  void initState() {
+    super.initState();
+    dogController = DogController(state: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
