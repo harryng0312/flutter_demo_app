@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ThemeUtil {
   static ThemeData defaultThemeData = ThemeData(
-    primarySwatch: Colors.yellow,
-    accentColor: Colors.green,
+    primarySwatch: Colors.blue,
+    // colorScheme:
     // Define the default brightness and colors.
     brightness: Brightness.light,
     primaryColor: Colors.blue,

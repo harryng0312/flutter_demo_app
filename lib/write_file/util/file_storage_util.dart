@@ -15,7 +15,12 @@ class FileStorageUtil {
   }
 
   Future<int> openFile() async {
-    Directory directory = await Path.getApplicationDocumentsDirectory();
+    Directory directory;
+    if (Platform.isIOS) {
+      directory = await Path.getApplicationDocumentsDirectory();
+    } else {
+      directory = (await Path.getExternalStorageDirectory())!;
+    }
     filePathName = "${directory.path}/dog.json";
     // _futureRaf = file.open(mode: FileMode.write);
     Future<int> rs = Future.value(0);
