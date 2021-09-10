@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 // import 'state/test_state.dart';
 // import 'forms/test_form_2.dart';
 // import 'sqlite/test_sqlite.dart';
-import 'write_file/test_file_storage.dart';
+// import 'write_file/test_file_storage.dart';
 // import 'multimedia/test_video_player.dart';
 // import 'multimedia/test_camera.dart';
+import 'notification/test_notification_2.dart';
 
 Future<void> main() async {
   MyApp app = MyApp();
-  // await app.init();
+  await app.init();
   runApp(app);
 }
