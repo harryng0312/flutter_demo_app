@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:learning_flutter/notification/util/notification_util.dart';
 import 'package:learning_flutter/write_file/model/dog.dart';
 import 'package:learning_flutter/notification/util/file_storage_util.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +19,18 @@ class DogController {
   late TextEditingController _txtSearchCtr;
   late GlobalKey _pnlResultKey;
 
+  // late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+  // late BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject;
   // constructors
-  DogController({required this.state}) {
+  DogController({required this.state});
+
+  void init() {
     _txtSearchCtr = TextEditingController();
     _pnlResultKey = GlobalKey();
   }
+
+  void dispose() {}
 
   // properties
   // List<Dog> get lsDataDog => _lsDog;
@@ -31,6 +39,10 @@ class DogController {
   TextEditingController get txtSearchCtr => _txtSearchCtr;
 
   GlobalKey get pnlResultKey => _pnlResultKey;
+
+  NotificationUtil get notificationUtil {
+    return Provider.of<NotificationUtil>(context, listen: false);
+  }
 
   // handlers
   void refreshDataHandler() {
@@ -74,16 +86,12 @@ class DogController {
 
   void addDogHandler() {
     // remove search value
-    // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin(); // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    // var initializationSettingsAndroid =
-    // new AndroidInitializationSettings('app_icon');
-    // var initializationSettingsIOS = IOSInitializationSettings(
-    //     onDidReceiveLocalNotification: onDidReceiveLocalNotification);
-    // var initializationSettings = InitializationSettings(
-    //     initializationSettingsAndroid, initializationSettingsIOS);
-    // flutterLocalNotificationsPlugin.initialize(initializationSettings,
-    //     onSelectNotification: onSelectNotification);
+    String body = lorem(paragraphs: 1, words: 1);
+    NotificationDetails? notificationDetails =
+        notificationUtil.createNotificationDetail();
     state.setState(() {
+      notificationUtil.localNotification
+          .show(0, "Title", body, notificationDetails, payload: "payload");
       txtSearchCtr.clear();
       refreshDataHandler();
     });

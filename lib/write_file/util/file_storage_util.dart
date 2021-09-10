@@ -8,10 +8,10 @@ class FileStorageUtil {
   // late Future<RandomAccessFile> _futureRaf;
   late String filePathName = "";
 
-  FileStorageUtil();
+  FileStorageUtil._();
 
   factory FileStorageUtil.getInstance() {
-    return FileStorageUtil();
+    return FileStorageUtil._();
   }
 
   Future<int> openFile() async {

@@ -15,6 +15,13 @@ class _DogHomePageState extends State<DogHomePage> {
   void initState() {
     super.initState();
     dogController = DogController(state: this);
+    dogController.init();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    dogController.dispose();
   }
 
   @override
