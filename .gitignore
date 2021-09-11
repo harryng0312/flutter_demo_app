@@ -49,5 +49,4 @@ app.*.map.json
 /**/.gradle/
 /**/build/
 /**/generated/
-/ios/Podfile
 /ios/Podfile.lock

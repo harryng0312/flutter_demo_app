@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
@@ -101,8 +101,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // where it was saved.
             final image = await _controller.takePicture();
             print ("Image Path:${image.path}");
-            dynamic result = await ImageGallerySaver.saveFile(image.path);
-            print("result: ${result.runtimeType}|${result}");
+            // dynamic result = await ImageGallerySaver.saveFile(image.path);
+            // print("result: ${result.runtimeType}|${result}");
             //File tmpImg = File(image.path);
             //tmpImg.copy(newPath)
             // If the picture was taken, display it on a new screen.

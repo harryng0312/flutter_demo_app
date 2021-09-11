@@ -1,0 +1,28 @@
+1. pod init
+2. open the Podfile:
+# add the Firebase pod for Google Analytics
+pod 'Firebase/Analytics'
+# or pod ‘Firebase/AnalyticsWithoutAdIdSupport’
+# for Analytics without IDFA collection capability
+
+# add pods for any other desired Firebase products
+# https://firebase.google.com/docs/ios/setup#available-pods
+
+3. pod install
+
+4. open AppDelegate
+import UIKit
+import Firebase
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  var window: UIWindow?
+  func application(_ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions:
+      [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    FirebaseApp.configure()
+    return true
+  }
+}
+
